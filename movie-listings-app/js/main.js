@@ -52,16 +52,22 @@ function getMovie() {
     axios.get(API + 'i=' + movieId)
         .then((response) => {
             let movie = response.data;
-            console.log(movie);
+          
             output += `
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="well text-center">
                         <img src="${movie.Poster}"/>
-                        <h5>${movie.Title}</h5>
                         <div class="alert alert-success" role="alert">${movie.Actors}</div>
                         <div class="alert alert-info" role="alert">${movie.Awards}</div>
                         <div class="alert alert-warning" role="alert">${movie.Director}</div>
                         <div class="alert alert-danger" role="alert">${movie.Genre}</div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+
+                    <div class="well text-center">
+                        <h5>${movie.Title}</h5>
+                        <div class="alert alert-success" role="alert">${movie.Actors}</div>
                     </div>
                 </div>
             `;
