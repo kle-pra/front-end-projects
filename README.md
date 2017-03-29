@@ -7,6 +7,7 @@ install globally (only once, use sudo for ubuntu)
 npm install -g local-web-server
 
 to serve just run command "ws" inside of folder
+
 go to localhost:8000 
 
 
