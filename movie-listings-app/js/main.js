@@ -15,36 +15,61 @@ $(document).ready(() => {
 function getMovies(searchText) {
 
     axios.get(API + 's=' + searchText)
-    .then((response)=>{
-        let movies = response.data.Search;
-        console.log(movies);
-        let output='';
-        $.each(movies, (movieIndex, movieValue) => { 
-            
-            output +=`
+        .then((response) => {
+            let movies = response.data.Search;
+            console.log(movies);
+            let output = '';
+            $.each(movies, (movieIndex, movieValue) => {
+
+                output += `
                 <div class="col-md-3">
                     <div class="well text-center">
                         <img src="${movieValue.Poster}"/>
                         <h5>${movieValue.Title}</h5>
-                        <a onclick="movieselected('${movieValue.imdbID}')" href="#">Details</a>
+                        <a onclick="movieSelected('${movieValue.imdbID}')" href="#">Details</a>
                     </div>
                 </div>
-            `; 
+            `;
+            });
+
+            $('#movies').html(output);
+
+        }).catch((err) => {
+
         });
-       
-        $('#movies').html(output);
-
-    }).catch((err)=>{
-
-    });
 }
 
-function movieSelected(id){
-    //set to session storage
+function movieSelected(id) {
+    sessionStorage.setItem('movieId', id);
+    window.location.href = '/movie.html';
+    return false;
 }
 
-function getMovie(){
+function getMovie() {
+    //read current from session storage and fetch data about movie
+    let movieId = sessionStorage.getItem('movieId');
+    let output = '';
+    axios.get(API + 'i=' + movieId)
+        .then((response) => {
+            let movie = response.data;
+            console.log(movie);
+            output += `
+                <div class="col-md-12">
+                    <div class="well text-center">
+                        <img src="${movie.Poster}"/>
+                        <h5>${movie.Title}</h5>
+                        <div class="alert alert-success" role="alert">${movie.Actors}</div>
+                        <div class="alert alert-info" role="alert">${movie.Awards}</div>
+                        <div class="alert alert-warning" role="alert">${movie.Director}</div>
+                        <div class="alert alert-danger" role="alert">${movie.Genre}</div>
+                    </div>
+                </div>
+            `;
 
-//read current from session storage and fetch data about movie
+            $('#movie').html(output);
+
+        }).catch((err) => {
+
+        });
 
 }
