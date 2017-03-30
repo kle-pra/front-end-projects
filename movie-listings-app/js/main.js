@@ -71,6 +71,12 @@ function getMovie() {
                             <li class="list-group-item"><strong>Genre:</strong> ${movie.Genre}</li>
                             <li class="list-group-item"><strong>Language:</strong> ${movie.Language}</li>
                         </ul>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Plot</h4>
+                                ${movie.Plot}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
