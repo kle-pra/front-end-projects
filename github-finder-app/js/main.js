@@ -39,9 +39,9 @@ function displayResult() {
                                     <div class="caption">
                                         <h3>${repo.name} <span class="label label-info">${repo.language}</span></h3>
                                         <p class="description">${repo.description}</p>
-                                        <p>
-                                            <a href="${repo.url}" class="btn btn-primary" role="button">Details</a>
+                                        <p class="text-center">
                                             <a href="${repo.html_url}" class="btn btn-primary" role="button">Link</a>
+                                            <a href="repo.html?id=${repo.id}" class="btn btn-primary" role="button">Details</a>
                                         </p>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@ function displayResult() {
                         <div class="col-md-3">                                         
                         </div> 
                         <div class="col-md-6">
-                            <div class="thumbnail">                       
+                            <div class="thumbnail text-center">                       
                                 <img id="avatar" src=${data.avatar_url} alt="..."> 
                                 <h2>${data.login}</h2>
                                 <ul class="list-group">
@@ -79,4 +79,10 @@ function displayResult() {
             searchResultOutput.html(output);
         }
     );
+
+     function loadRepoDetails() {
+        alert("details");
+
+    } 
+
 }
