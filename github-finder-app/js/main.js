@@ -9,41 +9,52 @@ const API_URL = 'https://api.github.com/users';
 function displayResult() {
     let searchResultOutput = $('#searchResultOutput');
     let inputVal = $('#searchInput').val();
+    let repoOutput = '';
     let output = '';
     
     $.get(API_URL + "/" + inputVal,
         (data, textStatus, jqXHR) => {
-             output = '';
+            
             $.get(data.repos_url,
                 (repos, textStatus, jqXHR) => {
                     console.log(repos);
                     $.each(repos, function (indexInArray, valueOfElement) {
-                        output +=
+                        repoOutput +=
                             `
-                        <div "well">                    
-                            <ul class="list-group">
-                                <li class="list-group-item">${valueOfElement.name}</li>
-                                <li class="list-group-item">${valueOfElement.description}</li>
-                                <li class="list-group-item">${valueOfElement.language}</li>
-                                <li class="list-group-item">${valueOfElement.public_repos}</li>
-                            </ul>                   
+                        <div class='row'>
+                            <div class="col-sm-12">
+                                <div class='well'>                    
+                                    <ul class="list-group">
+                                        <li class="list-group-item">${valueOfElement.name}</li>
+                                        <li class="list-group-item">${valueOfElement.description}</li>
+                                        <li class="list-group-item">${valueOfElement.language}</li>
+                                        <li class="list-group-item">${valueOfElement.public_repos}</li>
+                                    </ul>                   
+                                </div>
+                            </div>                      
                         </div>`;
                     });
-                    $('#repos').html(output);
+                    $('#repos').html(repoOutput);
                 }
             );
             console.log(data);
-            output =
+            output +=
                 `<h2>${data.login}</h2>
-                <div "well">                    
-                    <ul class="list-group">
-                        <li class="list-group-item">${data.login}</li>
-                        <li class="list-group-item">${data.name}</li>
-                        <li class="list-group-item">${data.organizations_url}</li>
-                        <li class="list-group-item">${data.public_repos}</li>
-                        <li class="list-group-item">${data.login}</li>
-                    </ul>                   
+                <div class='row'>
+                    <div class="col-md-4">
+                         <a href="#" class="thumbnail">
+                            <img src="https://avatars0.githubusercontent.com/u/2387907?v=3" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-md-8">                   
+                        <ul class="list-group">
+                            <li class="list-group-item">Name: ${data.name}</li>
+                            <li class="list-group-item">URL ${data.url}</li>
+                            <li class="list-group-item">Num. of repos: ${data.public_repos}</li>
+                        </ul>                   
+                    </div> 
                 </div>
+                <h3>Repos</h3>
                 <div id='repos' class='well'></div>`;
             searchResultOutput.html(output);
         }
