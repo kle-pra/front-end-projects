@@ -1,16 +1,15 @@
 $('document').ready(() => {
     $('#searchInput').on("keyup", () => {
-        displayResult();
+        loadSearchResult();
     });
 });
 
 const API_URL = 'https://api.github.com/users';
-
-//only for test, for production app call REST with credentails from backend!
+//only for test, for production app call REST with credentails from backend:
 const CLIENT_ID = '4ff8e2794e8670bb83f7';
 const CLIENT_SECRET = 'e3b8042fb90ef5161902998f7c09daa7a57cdba5';
 
-function displayResult() {
+function loadSearchResult() {
     let searchResultOutput = $('#searchResultOutput');
     let inputVal = $('#searchInput').val();
     let repoOutput = '';
@@ -40,8 +39,8 @@ function displayResult() {
                                         <h3>${repo.name} <span class="label label-info">${repo.language}</span></h3>
                                         <p class="description">${repo.description}</p>
                                         <p class="text-center">
-                                            <a href="${repo.html_url}" class="btn btn-primary" role="button">Link</a>
-                                            <a href="repo.html?id=${repo.id}" class="btn btn-primary" role="button">Details</a>
+                                            <a href="${repo.html_url}" class="btn btn-primary" role="button" target="_blank">See on GitHub</a>
+                                            <a href="repo.html?url=${repo.url}" class="btn btn-primary" role="button" target="_blank">Details</a>
                                         </p>
                                     </div>
                                 </div>
@@ -79,10 +78,18 @@ function displayResult() {
             searchResultOutput.html(output);
         }
     );
-
-     function loadRepoDetails() {
-        alert("details");
-
-    } 
-
 }
+
+function loadRepoDetails() {
+    var url = location.search.split('url=')[1];
+    $.get(url,
+        {
+            "client_id": CLIENT_ID,
+            "client_secret": CLIENT_SECRET
+        },
+        (repo, textStatus, jqXHR) => {
+            console.log(repo);
+            $('#repoDetailsOutput').html(JSON.stringify(repo, null, 4));
+        }
+    );
+} 
