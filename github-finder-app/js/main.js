@@ -5,6 +5,8 @@ $('document').ready(() => {
 });
 
 const API_URL = 'https://api.github.com/users';
+
+//only for test, for production app call REST with credentails from backend!
 const CLIENT_ID = '4ff8e2794e8670bb83f7';
 const CLIENT_SECRET = 'e3b8042fb90ef5161902998f7c09daa7a57cdba5';
 
