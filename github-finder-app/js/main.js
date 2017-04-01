@@ -1,8 +1,14 @@
+jquery:
 $('document').ready(() => {
     $('#searchInput').on("keyup", () => {
         loadSearchResult();
     });
 });
+
+// plain js way:
+// let searchElement = document.getElementById('searchInput');
+// searchElement.addEventListener('keyup', loadSearchResult);
+
 
 const API_URL = 'https://api.github.com/users';
 //only for test, for production app call REST with credentails from backend:

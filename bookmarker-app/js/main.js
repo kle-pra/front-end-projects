@@ -1,4 +1,3 @@
-
 showBookmarks();
 
 // listener for form submit
