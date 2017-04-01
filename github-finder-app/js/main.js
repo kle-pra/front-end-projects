@@ -8,6 +8,10 @@ const API_URL = 'https://api.github.com/users';
 //only for test, for production app call REST with credentails from backend:
 const CLIENT_ID = '4ff8e2794e8670bb83f7';
 const CLIENT_SECRET = 'e3b8042fb90ef5161902998f7c09daa7a57cdba5';
+let credentials = {
+    "client_id": CLIENT_ID,
+    "client_secret": CLIENT_SECRET
+};
 
 function loadSearchResult() {
     let searchResultOutput = $('#searchResultOutput');
@@ -15,19 +19,12 @@ function loadSearchResult() {
     let repoOutput = '';
     let output = '';
 
-    $.get(API_URL + "/" + inputVal, {
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET
-
-    },
+    $.get(API_URL + "/" + inputVal, 
+        credentials,
         (data, textStatus, jqXHR) => {
 
             $.get(data.repos_url,
-                {
-                    "client_id": CLIENT_ID,
-                    "client_secret": CLIENT_SECRET
-
-                },
+               credentials,
                 (repos, textStatus, jqXHR) => {
                     console.log(repos);
                     $.each(repos, function (indexInArray, repo) {
@@ -82,14 +79,18 @@ function loadSearchResult() {
 
 function loadRepoDetails() {
     var url = location.search.split('url=')[1];
-    $.get(url,
-        {
-            "client_id": CLIENT_ID,
-            "client_secret": CLIENT_SECRET
-        },
-        (repo, textStatus, jqXHR) => {
+    //jquery ajax function example for get
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: credentials,
+        success: function (repo) {
+            //TO-DO: render data  html
             console.log(repo);
             $('#repoDetailsOutput').html(JSON.stringify(repo, null, 4));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("There was a error fetching data:  " + jqXHR.status + " " + errorThrown);
         }
-    );
+    });
 } 
