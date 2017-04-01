@@ -1,9 +1,12 @@
 body {
   padding-top: 50px;
 }
-.search, #repository_details {
+.search {
   padding: 40px 15px;
   text-align: center;
+}
+#repository_details {
+  padding: 40px 15px;
 }
 
 .repo {

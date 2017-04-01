@@ -19,21 +19,23 @@ function loadSearchResult() {
     let repoOutput = '';
     let output = '';
 
-    $.get(API_URL + "/" + inputVal, 
+    $.get(API_URL + "/" + inputVal,
         credentials,
         (data, textStatus, jqXHR) => {
 
             $.get(data.repos_url,
-               credentials,
+                credentials,
                 (repos, textStatus, jqXHR) => {
                     console.log(repos);
                     $.each(repos, function (indexInArray, repo) {
+                        //check if field is not undefined else show empty string
+                        let language = repo.language == undefined ? "" : repo.language;
                         repoOutput +=
                             `
                             <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail repo">
                                     <div class="caption">
-                                        <h3>${repo.name} <span class="label label-info">${repo.language}</span></h3>
+                                        <h3>${repo.name} <span class="label label-info">${language}</span></h3>
                                         <p class="description">${repo.description}</p>
                                         <p class="text-center">
                                             <a href="${repo.html_url}" class="btn btn-primary" role="button" target="_blank">See on GitHub</a>
@@ -78,7 +80,8 @@ function loadSearchResult() {
 }
 
 function loadRepoDetails() {
-    var url = location.search.split('url=')[1];
+    let url = location.search.split('url=')[1];
+    let output = '';
     //jquery ajax function example for get
     $.ajax({
         type: "GET",
@@ -87,7 +90,32 @@ function loadRepoDetails() {
         success: function (repo) {
             //TO-DO: render data  html
             console.log(repo);
-            $('#repoDetailsOutput').html(JSON.stringify(repo, null, 4));
+            let language = repo.language == undefined ? "" : repo.language;
+            output = `
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="text-center">
+                            <h2>${repo.name} <span class="label label-primary">${language}</span></h2>
+                            <ul class="list-group">
+                                <li class="list-group-item">Github: <a href="${repo.html_url}">Link</a> </li>
+                                <li class="list-group-item">Num of watchers: ${repo.watchers}</li>
+                                <li class="list-group-item">Homepage: ${repo.homepage}</li>
+                                <li class="list-group-item">Num of watchers: ${repo.watchers}</li>
+                                <li class="list-group-item">Num of forks: ${repo.forks}</li>
+                                <li class="list-group-item">Clone url: ${repo.clone_url}</li>
+                                
+                            </ul>
+                        </div>             
+                        <div class="well">
+                            <h3>Description</h3>
+                            ${repo.description}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+
+            $('#repository_details').html(output);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("There was a error fetching data:  " + jqXHR.status + " " + errorThrown);
