@@ -101,13 +101,12 @@ function loadRepoDetails() {
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="text-center">
-                            <h2>${repo.name} <span class="label label-primary">${language}</span></h2>
+                            <h3>${repo.name} <span class="label label-success">${language}</span></h3>
                             <ul class="list-group">
                                 <li class="list-group-item">Github: <a href="${repo.html_url}">Link</a> </li>
-                                <li class="list-group-item">Num of watchers: ${repo.watchers}</li>
+                                <li class="list-group-item">Num of watchers: <span class="badge">${repo.watchers}</span></li>
                                 <li class="list-group-item">Homepage: ${repo.homepage}</li>
-                                <li class="list-group-item">Num of watchers: ${repo.watchers}</li>
-                                <li class="list-group-item">Num of forks: ${repo.forks}</li>
+                                <li class="list-group-item">Num of forks: <span class="badge">${repo.forks}</span></li>
                                 <li class="list-group-item">Clone url: ${repo.clone_url}</li>
                                 
                             </ul>
