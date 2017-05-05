@@ -1,4 +1,4 @@
-jquery:
+//jquery:
 $('document').ready(() => {
     $('#searchInput').on("keyup", () => {
         loadSearchResult();
