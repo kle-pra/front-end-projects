@@ -94,8 +94,6 @@ function loadRepoDetails() {
         url: url,
         data: credentials,
         success: function (repo) {
-            //TO-DO: render data  html
-            console.log(repo);
             let language = repo.language == undefined ? "" : repo.language;
             output = `
                 <div class="row">
@@ -118,8 +116,6 @@ function loadRepoDetails() {
                     </div>
                 </div>
             `;
-
-
             $('#repository_details').html(output);
         },
         error: function (jqXHR, textStatus, errorThrown) {
