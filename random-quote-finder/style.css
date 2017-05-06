@@ -1,7 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+
+.container{
+    padding-top: 50px; 
+}
+
 #quote {
     font-style: italic;
+    font-size:24px;
+    font-family: 'Inconsolata', monospace;
+
 }
 
 #author {
     font-weight: bold;
+    font-size:20px;
+    font-family: 'Inconsolata', monospace;
+
 }
