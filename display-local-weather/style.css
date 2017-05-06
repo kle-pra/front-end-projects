@@ -1,6 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata');
-
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
 .container{
     padding-top: 50px; 
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Poiret One', cursive;
+}
+
+#temperature, #weather {
+    font-size: 20px;
+}
+
+#temperature {
+    color: darkblue;
+    cursor: pointer;
 }
