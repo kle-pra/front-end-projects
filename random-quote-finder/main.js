@@ -3,6 +3,10 @@ $(document).ready(() => {
     $("#loadQuoteButton").on('click', () => {
         loadRandomQuote();
     });
+
+    $("#tweetQuoteButton").on('click', () => {
+        tweetCurrentQuote();
+    });
 });
 
 function loadRandomQuote() {
@@ -13,6 +17,12 @@ function loadRandomQuote() {
         success: (result, status, xhr) => {
             $("#author").html(result.author);
             $("#quote").html(result.quote);
+
+            //setup tweet url
+            $("#tweetQuoteButton").attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=test&text='
+     + encodeURIComponent('"' +  $("#quote").html() + '" ' +  $("#author").html()));
+
+
         }
     });
 }
