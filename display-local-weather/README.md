@@ -1,0 +1,1 @@
+jQuery demo app for displaying current weather, using geo-location and ajax call to REST API.
