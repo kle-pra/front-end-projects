@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="map"></div>
+  <script>
+    function initMap() {
+      var options = {
+        center: { lat: 46.056946, lng: 14.505751 },
+        scrollwheel: false,
+        zoom: 8
+      };
+      var map = new google.maps.Map(document.getElementById('map'), options);
+
+      addMarker({
+        cords: { lat: 46.50935590, lng: 15.07880300 },
+        iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        content: "Nice place to skate"
+      });
+
+      function addMarker(props) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: props.cords,
+        });
+
+        if (props.iconImage) {
+          marker.setIcon(props.iconImage);
+        }
+        if (props.content) {
+          marker.addListener('click', function () {
+            infoWindow.open(map, marker);
+          });
+
+          var infoWindow = new google.maps.InfoWindow(
+            {
+              content: props.content
+            }
+          );
+        }
+      }
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmmtGKghOT8Z7nXuRkaQsnk_xnsliQ5-g&callback=initMap" async
+    defer></script>
+</body>
+
+</html>
