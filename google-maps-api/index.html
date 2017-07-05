@@ -17,11 +17,28 @@
       };
       var map = new google.maps.Map(document.getElementById('map'), options);
 
-      addMarker({
+      google.maps.event.addListener(map, 'click', function(event){
+        addMarker({cords:event.latLng});
+      });
+
+
+      var markers = [{
         cords: { lat: 46.50935590, lng: 15.07880300 },
         iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
         content: "Nice place to skate"
-      });
+      },
+      {
+        cords: { lat: 46.70935590, lng: 15.07880300 },
+        iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      },
+      {
+        cords: { lat: 46.50935590, lng: 15.16880300 },
+        content: "Nice place to sleep"
+      }];
+
+      for (var i = 0; i < markers.length; i++) {
+        addMarker(markers[i]);
+      }
 
       function addMarker(props) {
         var marker = new google.maps.Marker({
