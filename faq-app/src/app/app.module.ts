@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
-
+import { DataService} from './services/data.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +14,7 @@ import { QuestionListComponent } from './components/question-list/question-list.
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
