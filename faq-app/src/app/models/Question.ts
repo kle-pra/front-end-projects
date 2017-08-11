@@ -1,6 +1,6 @@
 export interface Question {
     
-    text:number;
+    text:string;
     answer:string;
     hide:boolean;
 }
