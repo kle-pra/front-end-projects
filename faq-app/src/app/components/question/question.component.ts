@@ -15,7 +15,6 @@ export class QuestionComponent implements OnInit {
   }
 
   deleteQuestion(question:Question){
-
     this.dataService.deleteQuestion(question);  
   }
 
