@@ -3,32 +3,36 @@ import { Question } from '../models/Question';
 
 @Injectable()
 export class DataService {
-  questions:Question[];
+  questions: Question[];
 
-  constructor() { 
+  constructor() {
 
     this.questions = [
       {
-        text:"What is your name?",
-        answer:"Klemen",
-        hide:true
+        text: "What is your name?",
+        answer: "Klemen",
+        hide: true
       },
       {
-        text:"What is your age?",
-        answer:"30",
-        hide:false
+        text: "What is your age?",
+        answer: "30",
+        hide: false
       },
       {
-        text:"What is your job?",
-        answer:"Programmer",
-        hide:false
+        text: "What is your job?",
+        answer: "Programmer",
+        hide: false
       }
     ];
 
   }
-      
-  getQuestions():Question[] {
+
+  getQuestions(): Question[] {
     return this.questions;
+  }
+
+  addQuestion(question: Question): void {
+    this.questions.unshift(question);
   }
 
 }
