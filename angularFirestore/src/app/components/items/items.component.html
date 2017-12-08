@@ -1,9 +1,32 @@
-<div *ngIf ="items?.length>0; else noItems">
+<div *ngIf="items?.length>0; else noItems">
   <ul *ngFor="let item of items" class="collection">
-      <li class="collection-item"><strong>{{item.title}}: </strong> {{item.description}}</li>
+    <li class="collection-item">
+      <strong>{{item.title}}: </strong>
+       {{item.description}}
+       <a href="#" (click)=onDelete(item.id) class="secondary-content" title="Delete">
+         <i class="fa fa-trash"></i>
+       </a>
+       <a href="#" (click)=onEdit(item) class="" title="Edit">
+         <i class="fa fa-pencil"></i>
+       </a>
+       <div *ngIf="itemToEdit && itemToEdit.id == item.id">
+          <form (ngSubmit)="updateItem(itemToEdit)">
+              <div class="row">
+                  <div class="input-field col s6">
+                    <input type="text" placeholder="Add Title" [(ngModel)]="itemToEdit.title" name="title">
+                  </div>
+                  <div class="input-field col s6">
+                    <input type="text" placeholder="Add Description" [(ngModel)]="itemToEdit.description" name="description">
+                  </div>
+                  <input type="submit" value="Update Item" class="btn orange">
+                  <input type="button" value="Cancel" (click)="cancelUpdate()" class="btn red">
+                </div>
+          </form>
+       </div>
+    </li>
   </ul>
 </div>
 <ng-template #noItems>
   <hr>
-  <h5>There are no items to List</h5>
+  <h5>Nothing to show.</h5>
 </ng-template>
