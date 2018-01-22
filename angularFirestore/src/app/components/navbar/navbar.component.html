@@ -1,10 +1,11 @@
   <nav>
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo">AngularFire</a>
+      <a routerLink="/welcome" class="brand-logo">AngularFire</a>
       <ul class="right">
-        <li><a (click)="login()">Login</a></li>
-        <li><a href="">Register</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="logout();">Logout ({{username}})</a></li>
       </ul>
     </div>
   </nav>
-        
+

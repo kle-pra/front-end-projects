@@ -7,14 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isLoggedIn: boolean;
+  username: string;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService) {}
 
   ngOnInit() {
+    this.loginService.getAuth().subscribe(user => {
+      if (user) {
+        this.isLoggedIn = true;
+        this.username = user.email;
+      } else {
+        this.username = null;
+        this.isLoggedIn = false;
+      }
+    });
   }
 
-  login(){
-    this.loginService.login();
+  logout(): void {
+    this.loginService.signOut();
   }
 
 }

@@ -3,10 +3,10 @@
     <li class="collection-item">
       <strong>{{item.title}}: </strong>
        {{item.description}}
-       <a href="#" (click)=onDelete(item.id) class="secondary-content" title="Delete">
+       <a (click)=onDelete(item.id) class="secondary-content" title="Delete">
          <i class="fa fa-trash"></i>
        </a>
-       <a href="#" (click)=onEdit(item) class="" title="Edit">
+       <a (click)=onEdit(item) class="" title="Edit">
          <i class="fa fa-pencil"></i>
        </a>
        <div *ngIf="itemToEdit && itemToEdit.id == item.id">
