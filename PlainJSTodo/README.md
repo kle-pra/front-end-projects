@@ -1,1 +1,0 @@
-Example of a To-do list build with javascript.

@@ -1,1 +1,0 @@
-Wikipedia search app (Basic jquery & ajax example)

@@ -1,1 +1,0 @@
-Simple loan calculator made with plain javascript.
